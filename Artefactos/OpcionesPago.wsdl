@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.BancoABC/OpcionesPago/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="OpcionesPago" targetNamespace="http://www.BancoABC/OpcionesPago/" xmlns:xsd1="http://www.BancoABC/EntidadComun">
+    <wsdl:import namespace="http://www.BancoABC/EntidadComun" location="EntidadComun.xsd"></wsdl:import>
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://www.BancoABC/OpcionesPago/">
+            <xsd:import schemaLocation="EntidadComun.xsd" namespace="http://www.BancoABC/EntidadComun"></xsd:import>
+            <xsd:element name="OpcionesDePago">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Usuario" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="OpcionesDePagoResponse">
+        <xsd:complexType>
+          <xsd:sequence maxOccurs="unbounded" minOccurs="1">
+
+          	<xsd:element name="Productos" type="xsd1:Productos"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    
+        
+        </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="OpcionesDePagoRequest">
+    <wsdl:part element="tns:OpcionesDePago" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="OpcionesDePagoResponse">
+    <wsdl:part element="tns:OpcionesDePagoResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="OpcionesPago">
+    <wsdl:operation name="OpcionesDePago">
+      <wsdl:input message="tns:OpcionesDePagoRequest"/>
+      <wsdl:output message="tns:OpcionesDePagoResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OpcionesPagoSOAP" type="tns:OpcionesPago">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="OpcionesDePago">
+      <soap:operation soapAction="http://www.BancoABC/OpcionesPago/OpcionesDePago"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OpcionesPago">
+    <wsdl:port binding="tns:OpcionesPagoSOAP" name="OpcionesPagoSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

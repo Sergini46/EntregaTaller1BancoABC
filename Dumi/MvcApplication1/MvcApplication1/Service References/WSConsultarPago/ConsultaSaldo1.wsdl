@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <schema xmlns:tns="http://www.BancoABC/EntidadComun" elementFormDefault="qualified" targetNamespace="http://www.BancoABC/EntidadComun" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="RespuestaTransaccion" type="tns:MensajeTransaccion" />
+      <complexType name="MensajeTransaccion">
+        <sequence>
+          <element name="Mensaje" type="string" />
+          <element name="Result" type="boolean" />
+        </sequence>
+      </complexType>
+      <element name="ListaProductos" type="tns:Productos" />
+      <complexType name="Productos">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="Producto" type="string" />
+        </sequence>
+      </complexType>
+      <element name="MensajePago" type="tns:MensajePago" />
+      <complexType name="MensajePago">
+        <sequence>
+          <element name="TipoServicio" type="string" />
+          <element name="NoFactura" type="string" />
+          <element name="IdProducto" type="string" />
+          <element name="ValorFactura" type="double" />
+        </sequence>
+      </complexType>
+    </schema>
+  </wsdl:types>
+</wsdl:definitions>

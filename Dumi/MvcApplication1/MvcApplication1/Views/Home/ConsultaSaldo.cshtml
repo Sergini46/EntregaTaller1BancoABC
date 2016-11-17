@@ -1,0 +1,51 @@
+﻿@model MvcApplication1.Models.SaldoModel
+@{
+  
+}
+<h2>Consulta Saldo</h2>
+<hgroup class="title">
+
+</hgroup>
+
+@using (Html.BeginForm("ConsultarSaldo", "Home", new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Formulario de asociación</legend>
+        <p>
+            Ingrese los parametros
+        </p>
+        <ol>
+            <li class="name">
+                <label for="SelectedUserRoleId">Tipo Servicio</label>
+                <select id="TipoServicio" name="TipoServicio">
+                    <option value="1">Agua</option>
+                    <option value="2">Luz</option>
+                    <option value="3">Gas</option>
+                </select>
+            </li>
+             <li class="factura">
+                @Html.LabelFor(m => m.NumeroFactura)
+                @Html.TextBoxFor(m => m.NumeroFactura)
+            </li>
+            
+        </ol>
+        
+        <input type="submit" value="Consultar Saldo" />
+        @if(Model != null)
+        {
+            @Html.LabelFor(m => m.ReferenciaFactura)
+            @Html.TextAreaFor(m => m.ReferenciaFactura, new { @readonly = true })
+            
+            @Html.LabelFor(m => m.TotalPagar)
+            @Html.TextAreaFor(m => m.TotalPagar, new { @readonly = true })
+        }
+        
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.BancoABC.com/ConsultaSaldo/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ConsultaSaldo" targetNamespace="http://www.BancoABC.com/ConsultaSaldo/" xmlns:xsd1="http://www.BancoABC/EntidadComun">
+    <wsdl:import namespace="http://www.BancoABC/EntidadComun" location="EntidadComun.xsd"></wsdl:import>
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://www.BancoABC.com/ConsultaSaldo/">
+            <xsd:import schemaLocation="EntidadComun.xsd" namespace="http://www.BancoABC/EntidadComun"></xsd:import>
+            <xsd:element name="ConsultaSaldoPagar">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="TipoServicio" type="xsd:string" />
+          	<xsd:element name="NoFactura" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    
+            <xsd:element name="ConsultaSaldoPagarResponse" type="tns:ConsultarSaldoPagarResponse"></xsd:element>
+        
+            <xsd:complexType name="ConsultarSaldoPagarResponse">
+            	<xsd:sequence>
+            		<xsd:element name="referenciaFactura"
+            			type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="totalPagar" type="xsd:double"></xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultaSaldoPagarRequest">
+    <wsdl:part element="tns:ConsultaSaldoPagar" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultaSaldoPagarResponse">
+    <wsdl:part element="tns:ConsultaSaldoPagarResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="ConsultaSaldo">
+    <wsdl:operation name="ConsultaSaldoPagar">
+      <wsdl:input message="tns:ConsultaSaldoPagarRequest"/>
+      <wsdl:output message="tns:ConsultaSaldoPagarResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ConsultaSaldoSOAP" type="tns:ConsultaSaldo">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ConsultaSaldoPagar">
+      <soap:operation soapAction="http://www.BancoABC.com/ConsultaSaldo/ConsultaSaldoPagar"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConsultaSaldo">
+    <wsdl:port binding="tns:ConsultaSaldoSOAP" name="ConsultaSaldoSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.BancoABC.com/AdministrarConvenios/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="AdministrarConvenios" targetNamespace="http://www.BancoABC.com/AdministrarConvenios/" xmlns:xsd1="http://www.BancoABC/EntidadComun">
+    <wsdl:import namespace="http://www.BancoABC/EntidadComun" location="EntidadComun.xsd"></wsdl:import>
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://www.BancoABC.com/AdministrarConvenios/">
+            <xsd:import schemaLocation="EntidadComun.xsd" namespace="http://www.BancoABC/EntidadComun"></xsd:import>
+            <xsd:element name="CrearConvenio">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="Proveedor" type="xsd:string" />
+          	<xsd:element name="PermiteCompensar" type="xsd:boolean"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CrearConvenioResponse" type="xsd1:MensajeTransaccion">
+      </xsd:element>
+      <xsd:element name="EliminarConvenio">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="IdConvenio" type="xsd:int"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EliminarConvenioResponse" type="xsd1:MensajeTransaccion">
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CrearConvenioRequest">
+    <wsdl:part element="tns:CrearConvenio" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="CrearConvenioResponse">
+    <wsdl:part element="tns:CrearConvenioResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="EliminarConvenioRequest">
+  	<wsdl:part name="parameters" element="tns:EliminarConvenio"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="EliminarConvenioResponse">
+  	<wsdl:part name="parameters" element="tns:EliminarConvenioResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="AdministrarConvenios">
+    <wsdl:operation name="CrearConvenio">
+      <wsdl:input message="tns:CrearConvenioRequest"/>
+      <wsdl:output message="tns:CrearConvenioResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarConvenio">
+    	<wsdl:input message="tns:EliminarConvenioRequest"></wsdl:input>
+    	<wsdl:output message="tns:EliminarConvenioResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AdministrarConveniosSOAP" type="tns:AdministrarConvenios">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CrearConvenio">
+      <soap:operation soapAction="http://www.BancoABC.com/AdministrarConvenios/CrearConvenio"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AdministrarConvenios">
+    <wsdl:port binding="tns:AdministrarConveniosSOAP" name="AdministrarConveniosSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

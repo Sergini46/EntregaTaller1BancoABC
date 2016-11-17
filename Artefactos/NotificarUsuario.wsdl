@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.BancoABC.com/NotificarUsuario/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NotificarUsuario" targetNamespace="http://www.BancoABC.com/NotificarUsuario/" xmlns:xsd1="http://www.BancoABC/EntidadComun">
+    <wsdl:import namespace="http://www.BancoABC/EntidadComun" location="EntidadComun.xsd"></wsdl:import>
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://www.BancoABC.com/NotificarUsuario/">
+            <xsd:import schemaLocation="EntidadComun.xsd" namespace="http://www.BancoABC/EntidadComun"></xsd:import>
+            <xsd:element name="NotificarUsuario">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="From" type="xsd:string" />
+          	<xsd:element name="To" type="xsd:string"></xsd:element>
+          	<xsd:element name="Mensaje" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="NotificarUsuarioResponse" type="xsd1:MensajeTransaccion">
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="NotificarUsuarioRequest">
+    <wsdl:part element="tns:NotificarUsuario" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="NotificarUsuarioResponse">
+    <wsdl:part element="tns:NotificarUsuarioResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="NotificarUsuario">
+    <wsdl:operation name="NotificarUsuario">
+      <wsdl:input message="tns:NotificarUsuarioRequest"/>
+      <wsdl:output message="tns:NotificarUsuarioResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NotificarUsuarioSOAP" type="tns:NotificarUsuario">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="NotificarUsuario">
+      <soap:operation soapAction="http://www.BancoABC.com/NotificarUsuario/NotificarUsuario"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NotificarUsuario">
+    <wsdl:port binding="tns:NotificarUsuarioSOAP" name="NotificarUsuarioSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

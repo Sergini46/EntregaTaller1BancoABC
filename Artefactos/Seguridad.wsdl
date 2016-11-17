@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.BancoABC.com/Seguridad/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Seguridad" targetNamespace="http://www.BancoABC.com/Seguridad/" xmlns:xsd1="http://www.example.org/EntidadComun">
+    <wsdl:import namespace="http://www.example.org/EntidadComun" location="EntidadComun.xsd"></wsdl:import>
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://www.BancoABC.com/Seguridad/">
+      <xsd:element name="Usuario">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="Usuario" type="xsd:string"></xsd:element>
+          	<xsd:element name="Password" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UsuarioAutenticado" type="tns:RespuestaTransaccion">
+      </xsd:element>
+    
+        
+            <xsd:complexType name="RespuestaTransaccion">
+            	<xsd:sequence>
+            		<xsd:element name="Mensaje" type="xsd:string"></xsd:element>
+            		<xsd:element name="Result" type="xsd:boolean"></xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="AutenticarUsuarioRequest">
+    <wsdl:part element="tns:Usuario" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="AutenticarUsuarioResponse">
+    <wsdl:part element="tns:UsuarioAutenticado" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="Seguridad">
+    <wsdl:operation name="AutenticarUsuario">
+      <wsdl:input message="tns:AutenticarUsuarioRequest"/>
+      <wsdl:output message="tns:AutenticarUsuarioResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SeguridadSOAP" type="tns:Seguridad">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="AutenticarUsuario">
+      <soap:operation soapAction="http://www.BancoABC.com/Seguridad/AutenticarUsuario"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Seguridad">
+    <wsdl:port binding="tns:SeguridadSOAP" name="SeguridadSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

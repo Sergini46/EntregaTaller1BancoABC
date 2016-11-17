@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd1="http://www.example.org/EntidadComun" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.BancoABC.com/Seguridad/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Seguridad" targetNamespace="http://www.BancoABC.com/Seguridad/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://www.example.org/EntidadComun" location="Seguridad?wsdl=EntidadComun.xsd" />
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.BancoABC.com/Seguridad/">
+      <xsd:element name="Usuario">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Usuario" type="xsd:string" />
+            <xsd:element name="Password" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UsuarioAutenticado" type="tns:RespuestaTransaccion" />
+      <xsd:complexType name="RespuestaTransaccion">
+        <xsd:sequence>
+          <xsd:element name="Mensaje" type="xsd:string" />
+          <xsd:element name="Result" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="AutenticarUsuarioRequest">
+    <wsdl:part name="parameters" element="tns:Usuario" />
+  </wsdl:message>
+  <wsdl:message name="AutenticarUsuarioResponse">
+    <wsdl:part name="parameters" element="tns:UsuarioAutenticado" />
+  </wsdl:message>
+  <wsdl:portType name="Seguridad">
+    <wsdl:operation name="AutenticarUsuario">
+      <wsdl:input message="tns:AutenticarUsuarioRequest" />
+      <wsdl:output message="tns:AutenticarUsuarioResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SeguridadSOAP" type="tns:Seguridad">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AutenticarUsuario">
+      <soap:operation soapAction="http://www.BancoABC.com/Seguridad/AutenticarUsuario" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Seguridad">
+    <wsdl:port name="SeguridadSOAP" binding="tns:SeguridadSOAP">
+      <soap:address location="http://104.197.5.244:8086/SeguridadSrv/services/Seguridad/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

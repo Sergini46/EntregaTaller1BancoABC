@@ -1,0 +1,43 @@
+﻿@model MvcApplication1.Models.HomeModel
+@{
+  
+}
+
+<h2>Login</h2>
+<hgroup class="title">
+
+</hgroup>
+
+@using (Html.BeginForm("ConsultarLogin", "Home", new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Formulario de asociación</legend>
+        <p>
+            Ingrese los parametros
+        </p>
+        <ol>
+            <li class="name">
+                @Html.LabelFor(m => m.Usuario)
+                @Html.TextBoxFor(m => m.Usuario)
+            </li>
+             <li class="Contraseña">
+                @Html.LabelFor(m => m.Contraseña)
+                @Html.PasswordFor(m => m.Contraseña)
+            </li>
+        </ol>
+        <input type="submit" value="Consultar" />
+
+         @if (Model != null &&  Model.RetornoWS != "")
+        {
+            @Html.LabelFor(m => m.RetornoWS)
+            @Html.TextAreaFor(m => m.RetornoWS) 
+        }
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.BancoABC.com/NotificarCompensacion/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NotificarCompensacion" targetNamespace="http://www.BancoABC.com/NotificarCompensacion/" xmlns:xsd1="http://www.BancoABC/EntidadComun">
+    <wsdl:import namespace="http://www.BancoABC/EntidadComun" location="EntidadComun.xsd"></wsdl:import>
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://www.BancoABC.com/NotificarCompensacion/">
+            <xsd:import schemaLocation="EntidadComun.xsd" namespace="http://www.BancoABC/EntidadComun"></xsd:import>
+            <xsd:element name="NotificarTransaccion" type="xsd1:MensajePago">
+      </xsd:element>
+      <xsd:element name="NotificarTransaccionResponse" type="xsd1:MensajeTransaccion">
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="NotificarTransaccionRequest">
+    <wsdl:part element="tns:NotificarTransaccion" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="NotificarTransaccionResponse">
+    <wsdl:part element="tns:NotificarTransaccionResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="NotificarCompensacion">
+    <wsdl:operation name="NotificarTransaccion">
+      <wsdl:input message="tns:NotificarTransaccionRequest"/>
+      <wsdl:output message="tns:NotificarTransaccionResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NotificarCompensacionSOAP" type="tns:NotificarCompensacion">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="NotificarTransaccion">
+      <soap:operation soapAction="http://www.BancoABC.com/NotificarCompensacion/NotificarTransaccion"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NotificarCompensacion">
+    <wsdl:port binding="tns:NotificarCompensacionSOAP" name="NotificarCompensacionSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

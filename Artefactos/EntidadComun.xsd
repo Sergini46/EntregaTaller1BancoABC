@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.BancoABC/EntidadComun" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.BancoABC/EntidadComun">
+
+
+    <element name="RespuestaTransaccion" type="tns:MensajeTransaccion"></element>
+
+    <complexType name="MensajeTransaccion">
+    	<sequence>
+    		<element name="Mensaje" type="string"></element>
+    		<element name="Result" type="boolean"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="ListaProductos" type="tns:Productos"></element>
+
+    <complexType name="Productos">
+    	<sequence>
+    		<element name="Producto" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="MensajePago" type="tns:MensajePago"></element>
+
+    <complexType name="MensajePago">
+    	<sequence>
+    		<element name="TipoServicio" type="string"></element>
+    		<element name="NoFactura" type="string"></element>
+    		<element name="IdProducto" type="string"></element>
+    		<element name="ValorFactura" type="double"></element>
+    	</sequence>
+    </complexType>
+</schema>

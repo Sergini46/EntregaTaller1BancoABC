@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.BancoABC.com/RealizarPago/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RealizarPago" targetNamespace="http://www.BancoABC.com/RealizarPago/" xmlns:xsd1="http://www.BancoABC/EntidadComun">
+    <wsdl:import namespace="http://www.BancoABC/EntidadComun" location="EntidadComun.xsd"></wsdl:import>
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://www.BancoABC.com/RealizarPago/">
+            <xsd:import schemaLocation="EntidadComun.xsd" namespace="http://www.BancoABC/EntidadComun"></xsd:import>
+            <xsd:element name="RealizarPago" type="xsd1:MensajePago">
+      </xsd:element>
+      <xsd:element name="RealizarPagoResponse" type="xsd1:MensajeTransaccion">
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="RealizarPagoRequest">
+    <wsdl:part element="tns:RealizarPago" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="RealizarPagoResponse">
+    <wsdl:part element="tns:RealizarPagoResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="RealizarPago">
+    <wsdl:operation name="RealizarPago">
+      <wsdl:input message="tns:RealizarPagoRequest"/>
+      <wsdl:output message="tns:RealizarPagoResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RealizarPagoSOAP" type="tns:RealizarPago">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="RealizarPago">
+      <soap:operation soapAction="http://www.BancoABC.com/RealizarPago/RealizarPago"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RealizarPago">
+    <wsdl:port binding="tns:RealizarPagoSOAP" name="RealizarPagoSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

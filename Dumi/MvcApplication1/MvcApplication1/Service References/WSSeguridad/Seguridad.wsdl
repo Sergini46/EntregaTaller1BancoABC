@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <schema xmlns:tns="http://www.example.org/EntidadComun" elementFormDefault="qualified" targetNamespace="http://www.example.org/EntidadComun" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="RespuestaTransaccion" type="tns:MensajeTransaccion" />
+      <complexType name="MensajeTransaccion">
+        <sequence>
+          <element name="Mensaje" type="string" />
+          <element name="Result" type="boolean" />
+        </sequence>
+      </complexType>
+    </schema>
+  </wsdl:types>
+</wsdl:definitions>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd1="http://www.BancoABC/EntidadComun" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.BancoABC.com/CompensaII/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CompensaII" targetNamespace="http://www.BancoABC.com/CompensaII/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://www.BancoABC/EntidadComun" location="CompensaII?wsdl=EntidadComun.xsd" />
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.BancoABC.com/CompensaII/">
+      <xsd:import schemaLocation="CompensaII?xsd=EntidadComun.xsd" namespace="http://www.BancoABC/EntidadComun" />
+      <xsd:element name="Compensacion" type="xsd1:MensajePago" />
+      <xsd:element name="CompensacionResponse" type="xsd1:MensajeTransaccion" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CompensacionResponse">
+    <wsdl:part name="parameters" element="tns:CompensacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="CompensacionRequest">
+    <wsdl:part name="parameters" element="tns:Compensacion" />
+  </wsdl:message>
+  <wsdl:portType name="CompensaII">
+    <wsdl:operation name="Compensacion">
+      <wsdl:input message="tns:CompensacionRequest" />
+      <wsdl:output message="tns:CompensacionResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CompensaIISOAP" type="tns:CompensaII">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Compensacion">
+      <soap:operation soapAction="http://www.BancoABC.com/CompensaII/Compensacion" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CompensaII">
+    <wsdl:port name="CompensaIISOAP" binding="tns:CompensaIISOAP">
+      <soap:address location="http://104.197.5.244:8086/CompensaIISrv/services/CompensaII/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.BancoABC.com/VerificarSaldo/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="VerificarSaldo" targetNamespace="http://www.BancoABC.com/VerificarSaldo/" xmlns:xsd1="http://www.BancoABC/EntidadComun">
+    <wsdl:import namespace="http://www.BancoABC/EntidadComun" location="EntidadComun.xsd"></wsdl:import>
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://www.BancoABC.com/VerificarSaldo/">
+            <xsd:import schemaLocation="EntidadComun.xsd" namespace="http://www.BancoABC/EntidadComun"></xsd:import>
+            <xsd:element name="VerificarSaldo">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="IdProducto" type="xsd:int" />
+          	<xsd:element name="ValorFactura" type="xsd:double"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="VerificarSaldoResponse" type="xsd1:MensajeTransaccion">
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="VerificarSaldoRequest">
+    <wsdl:part element="tns:VerificarSaldo" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="VerificarSaldoResponse">
+    <wsdl:part element="tns:VerificarSaldoResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="VerificarSaldo">
+    <wsdl:operation name="VerificarSaldo">
+      <wsdl:input message="tns:VerificarSaldoRequest"/>
+      <wsdl:output message="tns:VerificarSaldoResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VerificarSaldoSOAP" type="tns:VerificarSaldo">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="VerificarSaldo">
+      <soap:operation soapAction="http://www.BancoABC.com/VerificarSaldo/VerificarSaldo"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VerificarSaldo">
+    <wsdl:port binding="tns:VerificarSaldoSOAP" name="VerificarSaldoSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

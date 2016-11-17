@@ -1,0 +1,62 @@
+﻿@model MvcApplication1.Models.PagoModel
+@{
+  
+}
+<h2>Realizar Pago</h2>
+<hgroup class="title">
+
+</hgroup>
+
+@using (Html.BeginForm("Pagar", "Home", new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Formulario de asociación</legend>
+        <p>
+            Ingrese los parametros
+        </p>
+        <ol>
+            <li class="TipoServicio">
+                <label for="SelectedUserRoleId">Tipo Servicio</label>
+                <select id="TipoServicio" name="TipoServicio">
+                    <option value="1">Agua</option>
+                    <option value="2">Luz</option>
+                    <option value="2">Gas</option>
+                </select>
+            </li>
+             <li class="NoFactura">
+                @Html.LabelFor(m => m.Nofactura)
+                @Html.TextBoxFor(m => m.Nofactura)
+            </li>
+             <li class="Producto">
+                <label for="SelectedUserRoleId">Tipo Producto</label>
+                <select id="IdProducto" name="IdProducto">
+                    <option value="1">Ahorros</option>
+                    <option value="2">Corriente</option>
+                </select>
+            </li>
+             <li class="ValorFactura">
+                @Html.LabelFor(m => m.ValorFactura)
+                @Html.TextBoxFor(m => m.ValorFactura)
+            </li>
+            <li class="Usuario">
+                @Html.LabelFor(m => m.Usuario)
+                @Html.TextBoxFor(m => m.Usuario)
+            </li>
+        </ol>
+        
+        <input type="submit" value="realizar Pago" />
+
+         @if (Model != null &&  Model.RetornoWS != "")
+        { 
+            @Html.LabelFor(m => m.RetornoWS)
+            @Html.TextAreaFor(m => m.RetornoWS, new { @readonly = true }) 
+        }
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

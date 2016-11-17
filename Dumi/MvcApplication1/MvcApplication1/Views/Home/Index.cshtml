@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Banco ABC Pago de servicio Agua, Luz, Gas <mark>Universidad Javeriana 2016</mark>
+            </p>
+        </div>
+    </section>
+}
+<h3>Web Services a probar</h3>
+<ol class="round">
+    <li class="one">
+        <h5>Seguridad</h5>
+        Para probar el servicio de seguridad  <li>@Html.ActionLink("haga clic aqui", "Login", "Home")</li>
+    </li>
+
+    <li class="two">
+        <h5>Consulta de Saldo</h5>
+        Para probar el web service de consulta de saldo <li>@Html.ActionLink("haga clic aqui", "ConsultaSaldo", "Home")</li>
+
+    <li class="three">
+        <h5>Opciones de pago </h5>
+       Para probar el web service opciones de pagos <li>@Html.ActionLink("haga clic aqui", "", "Home")</li>
+    </li>
+    <li class="four">
+        <h5>Verificar Saldo</h5>
+       Para probar el web service de verificación de saldo <li>@Html.ActionLink("haga clic aqui", "VerificarSaldo", "Home")</li>
+    </li>
+    <li class="five">
+        <h5>Realizar Pago</h5>
+       Para probar el web service de realizar el pago <li>@Html.ActionLink("haga clic aqui", "RealizarPago", "Home")</li>
+    </li>
+</ol>
